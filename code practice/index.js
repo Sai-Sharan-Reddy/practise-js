@@ -330,3 +330,20 @@ var compose = function(functionsArray) {
 };
 const fn = compose([x => x + 1, x => 2 * x]);
 console.log(fn(4));
+
+
+/////////////////// filter without using array.filter() built in method.
+
+var filter = function(arr, fn) {
+    let returnArray = [];
+    for (let i=0; i< arr.length; i++) {
+        if (fn(arr[i], i)) {
+            returnArray.push(arr[i]);
+        }
+    }
+
+    return returnArray;
+};
+
+const fuuuun = function firstIndex(n, i) { return i === 0; }
+console.log(filter([1,2,3], fuuuun));
