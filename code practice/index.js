@@ -347,3 +347,28 @@ var filter = function(arr, fn) {
 
 const fuuuun = function firstIndex(n, i) { return i === 0; }
 console.log(filter([1,2,3], fuuuun));
+
+/////////////////////////////////////////////////////////////////////////
+//////////////////////// Onclick Handler attached to a Div,that changes the color to red,
+//////// once all the div are red, the reverse order follows, changing all the div colors back to green.
+
+let elementsArray = [];
+function handleOnClick(blockId) {
+    if(!elementsArray.includes(blockId)) {
+        elementsArray.push(blockId);
+    }
+    const blockElement = document.getElementById(blockId);
+    blockElement.style.backgroundColor = "red";
+
+    if (elementsArray.length === 4) {
+       const intervalId = setInterval(() => {
+            const blockIDInside = elementsArray[elementsArray.length - 1] 
+            const blockElementinside = document.getElementById(blockIDInside);
+            blockElementinside.style.backgroundColor = "aquamarine";
+            elementsArray.pop();
+            if(elementsArray.length === 0) {
+                clearInterval(intervalId);
+            }
+        }, 300);
+    }
+}
