@@ -369,6 +369,6 @@ function handleOnClick(blockId) {
             if(elementsArray.length === 0) {
                 clearInterval(intervalId);
             }
-        }, 300);
+        }, 500);
     }
 }
