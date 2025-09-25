@@ -138,7 +138,7 @@ console.log(this); // window object
 function someFunction(){
     console.log(this);
     // depends on strict mode, 
-    // if "use strict" -> undefined, else global window onject, 
+    // if "use strict" -> undefined, else global window object, 
     // due to the concept called "this substitution".
 }
 someFunction();
@@ -372,3 +372,48 @@ function handleOnClick(blockId) {
         }, 500);
     }
 }
+
+////////////////////////////////////////////// DEBOUNCED FUNCTION /////////////////////////////////////////////////////////
+// pass debouncedFunc as a callback to event handlers or anywhere you want to use a debounce function.
+
+function generalFunction(...args) {
+    console.log("This is an expensive call, we just have replicate it.");
+}
+
+function debouncerFunction(callback, delay) {
+    let timerId;
+    return function() {
+        const args = arguments;
+        const context = this;
+        clearTimeout(timerId);
+        timerId = setTimeout(()=>{
+            callback.apply(context, args);
+        }, delay);
+    }
+}
+
+const debouncedFunc = debouncerFunction(generalFunction, 1000);  // this is the debounced function to use.
+
+
+////////////////////////////////////////////// THROTTLE FUNCTION /////////////////////////////////////////////////////////
+
+function throttlerFunction(callback, delay) {
+    let checkFlag = true;
+    return function() {
+        const args = arguments;
+        const context = this;
+
+        if(checkFlag) {
+            callback.apply(context, args);
+            checkFlag = false;
+            setTimeout(() => {
+                checkFlag = true;
+            }, delay);
+        }
+    }
+}
+
+const throttledFunction = throttlerFunction(generalFunction, 500); // this is the throttled function.
+
+
+
