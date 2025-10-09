@@ -30,14 +30,12 @@ var createCounter = function(n) {
     };
 };
 
-
 const counter = createCounter(-3)
-console.log(counter()); // 10
+console.log(counter());
 console.log(counter());
 console.log(counter());
 
 /*********************************** */
-
 async function sleep(millis) {
 
     return new Promise((resolve) => {
@@ -47,7 +45,6 @@ async function sleep(millis) {
 
 let t = Date.now()
 sleep(100).then(() => console.log(Date.now() - t)) // 100
-
 
 
 // ***************************//
@@ -85,9 +82,6 @@ function getArea(grid) {
 
 console.log(getArea([[0,0,0],[0,0,0],[0,0,1],[0,1,0]]));
 
-
-
-
 //////////////////////
 
 function outerFunction(callback) {
@@ -118,9 +112,7 @@ console.log(memoized(10));
 console.log(memoized(5));
 console.log(memoized(10));
 
-
-//////////////
-
+///////////////////////   async function always returns a promise  //////////////////////////////////////////
 
 async function newFunction() {
     return "just a string";
@@ -129,8 +121,6 @@ async function newFunction() {
 const someValue = newFunction();
 console.log(someValue);
 someValue.then((res) => console.log(res));
-
-
 
 ////////////////////////// this keyword ///////////////////////////////
 
@@ -144,7 +134,7 @@ function someFunction(){
 someFunction();
 
 const newArrowFunction = () => {
-    console.log(this);
+    console.log(this); // Arrow functions always take the scope of their lexical parent, i.e., thier outer scope.
 }
 
 newArrowFunction();
@@ -283,8 +273,8 @@ function toFindDuplicatesUsingOtherWay(inputArr) {
     let duplicates = [];
     let uniques =[];
     for (const item of inputArr){ 
-        // for-in iterates through indexes- use for objects (to find/use against keys)
-        // for-of iterates through values- use for arrays(to find/use against values)
+        // for-in iterates through indexes - use for objects (to find/use against keys)
+        // for-of iterates through values - use for arrays(to find/use against values)
         if(uniques.includes(item)) {
             duplicates.push(item);
         } else {
@@ -375,9 +365,10 @@ function handleOnClick(blockId) {
 
 ////////////////////////////////////////////// DEBOUNCED FUNCTION /////////////////////////////////////////////////////////
 // pass debouncedFunc as a callback to event handlers or anywhere you want to use a debounce function.
+// The difference between each call should be greater than the delay, otherwise the function call wouldn't occur.
 
 function generalFunction(...args) {
-    console.log("This is an expensive call, we just have replicate it.");
+    console.log("This is an expensive call, we just have mocked an expensive call.");
 }
 
 function debouncerFunction(callback, delay) {
@@ -397,6 +388,8 @@ const debouncedFunc = debouncerFunction(generalFunction, 1000);  // this is the 
 
 ////////////////////////////////////////////// THROTTLE FUNCTION /////////////////////////////////////////////////////////
 
+// the delay is maintained, irrespective of the user input. The execution happens between specific intervals.
+
 function throttlerFunction(callback, delay) {
     let checkFlag = true;
     return function() {
@@ -414,6 +407,30 @@ function throttlerFunction(callback, delay) {
 }
 
 const throttledFunction = throttlerFunction(generalFunction, 500); // this is the throttled function.
+
+
+
+////////////////////////// currying in JS /////////////////////
+
+/// breaking a function that takes multiple arguments into a multiple functions that take one argument at a time.
+// example use cases  : 
+// 1. Function resuability
+// 2. Avoid repeting arguments in config functions.
+
+function curryingFunction(a) {
+
+    return function insideCurryingFunction(b) {
+        if (b !== undefined) {
+            return curryingFunction(a + b);
+        }
+        return a;
+    }
+}
+
+console.log(curryingFunction(2)(3)(4)(5)(6)());
+
+
+
 
 
 
