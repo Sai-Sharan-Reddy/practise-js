@@ -433,60 +433,79 @@ console.log(curryingFunction(2)(3)(4)(5)(6)());
 
 //////////////////// Custom Hook Example ///////////////////////////////////////
 
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// const useFetch = (url) => {
+//   const [data, setData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!url) return;
+//   useEffect(() => {
+//     if (!url) return;
 
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
+//     const fetchData = async () => {
+//       setLoading(true);
+//       setError(null);
 
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+//       try {
+//         const response = await fetch(url);
+//         if (!response.ok) {
+//           throw new Error(`Error: ${response.status}`);
+//         }
+//         const result = await response.json();
+//         setData(result);
+//       } catch (err) {
+//         setError(err.message);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-    fetchData();
-  }, [url]);
+//     fetchData();
+//   }, [url]);
 
-  return { data, loading, error };
-};
+//   return { data, loading, error };
+// };
 
-export default useFetch;
+// export default useFetch;
 
 
-// Usage in a react component//
+// // Usage in a react component//
 
-import React from 'react';
-import useFetch from './useFetch';
+// import React from 'react';
+// import useFetch from './useFetch';
 
-const MyComponent = () => {
-  const { data, loading, error } = useFetch('https://api.example.com/data');
+// const MyComponent = () => {
+//   const { data, loading, error } = useFetch('https://api.example.com/data');
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Error: {error}</p>;
 
-  return (
-    <div>
-      {data && data.map(item => <div key={item.id}>{item.name}</div>)}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       {data && data.map(item => <div key={item.id}>{item.name}</div>)}
+//     </div>
+//   );
+// };
 
 
 //////////// Custom Hook Example end ///////////////////
+
+
+var hasSameDigits = function(s) {
+    let first = s;
+    while(first.length > 2) {
+        let newString = "";
+        for(let i=0; i < first.length - 1; i++) {
+            newString += ((Number(first[i]) + Number(first[i+1])) % 10);
+        }
+        first = newString;
+    }
+    if(first.length == 2) {
+        return first[0] == first[1];
+    }
+    return false;
+};
+
+console.log(hasSameDigits("3902"));
+
