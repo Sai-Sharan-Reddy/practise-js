@@ -9,6 +9,8 @@ function closures() {
 }
 closures()();
 
+// function along with its lexical scope bundled together is a closure.
+
 const newArray = [1, 2, 3];
 Array.prototype.last = function () {
   const lastIndex = this.length - 1;
